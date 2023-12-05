@@ -1,5 +1,5 @@
-use std::ffi::c_char;
-use std::fs;
+
+
 use lazy_static::lazy_static;
 use regex::Regex;
 advent_of_code::solution!(1);
@@ -17,7 +17,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     for line in lines{
         let forward_numbers: Vec<&str> = line.matches(char::is_numeric).collect();
         let rev_numbers: Vec<&str> = line.rmatches(char::is_numeric).collect();
-        if(forward_numbers.is_empty() && rev_numbers.is_empty()){
+        if forward_numbers.is_empty() && rev_numbers.is_empty() {
             continue;
         }
         let value = format!("{}{}", forward_numbers[0], rev_numbers[0]);
