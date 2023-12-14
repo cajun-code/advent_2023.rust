@@ -11,10 +11,10 @@ lazy_static!{
 pub fn part_one(input: &str) -> Option<u32> {
     let mut lines = input.lines();
     let mut previous: Option<&str> = None;
-    let mut current: Option<&str> = None;
+    //let mut current: Option<&str> = None;
     let forward: Option<&str> = None;
     let mut total: u32 = 0;
-    current = lines.next();
+    let mut current = lines.next();
     for line in lines{
         total += check_for_parts(previous, current, Some(line));
         previous = current;
@@ -37,7 +37,7 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
             len = current.unwrap().len();
         }
         let mut is_previous  = false;
-        let mut is_current = false;
+
         let mut is_future = false;
         if previous.is_some(){
             let slice = &previous.unwrap()[pos .. len];
@@ -47,7 +47,7 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
         }
         let slice = &current.unwrap()[pos .. len];
         println!("cutting string {} at {pos}, {len}", current.unwrap());
-        is_current = SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
+        let is_current = SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
         println!("Looking at current row: {slice} {is_current}");
 
         if forward.is_some() {
