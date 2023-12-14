@@ -30,9 +30,7 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
         let part = cap.get(0).unwrap().as_str();
         let v:Vec<_> = current.unwrap().match_indices(part).collect();
         let mut pos = v.first().unwrap().0;
-        if pos > 0{
-            pos -=1;
-        }
+        pos = pos.saturating_sub(1);
         let mut len = v.first().unwrap().1.len()+2+pos;
 
         if len >= current.unwrap().len(){
@@ -58,7 +56,7 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
             is_future =  SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
             println!("Looking at forward row: {slice} {is_future}");
         }
-        if is_previous || is_current || is_future {
+        if is_current || is_previous || is_future {
             total += part.parse::<u32>().unwrap();
         }
         let is_part = is_previous || is_current || is_future;
