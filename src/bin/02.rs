@@ -12,23 +12,23 @@ pub fn part_one(input: &str) -> Option<u32> {
     //println!("{}", input);
     let mut total: u32 = 0;
     let required: HashMap<&str, u32> = HashMap::from([("red", 12), ("green", 13), ("blue", 14)]);
-    let lines = input.split("\n");
+    let lines = input.split('\n');
     for line in lines{
         if line.is_empty(){
             continue;
         }
-        let mut games = line.split(":");
+        let mut games = line.split(':');
         let id = games.next().unwrap();
         let game_id = NUMBER_REGEX.find(id).unwrap().as_str();
         let game = games.next().unwrap();
-        let bags = game.split(";");
+        let bags = game.split(';');
         let mut playable: bool = true;
         for bag in bags{
             if !playable{
                 continue;
             }
             let mut cubes:HashMap<&str, u32> = HashMap::from([("red", 0), ("green", 0), ("blue", 0)]);
-            for dice in bag.split(","){
+            for dice in bag.split(','){
                 let number = NUMBER_REGEX.find(dice).unwrap().as_str();
                 let color  = COLOR_REGEX.find(dice).unwrap().as_str();
                 cubes.insert(color, number.parse::<u32>().unwrap());
@@ -49,18 +49,18 @@ pub fn part_one(input: &str) -> Option<u32> {
 
 pub fn part_two(input: &str) -> Option<u32> {
     let mut total: u32 = 0;
-    let lines = input.split("\n");
+    let lines = input.split('\n');
     for line in lines{
         if line.is_empty(){
             continue;
         }
-        let mut games = line.split(":");
+        let mut games = line.split(':');
         let _id = games.next().unwrap();
         let game = games.next().unwrap();
-        let bags = game.split(";");
+        let bags = game.split(';');
         let mut cubes:HashMap<&str, u32> = HashMap::from([("red", 0), ("green", 0), ("blue", 0)]);
         for bag in bags{
-            for dice in bag.split(","){
+            for dice in bag.split(','){
                 let number = NUMBER_REGEX.find(dice).unwrap().as_str().parse::<u32>().unwrap();
                 let color  = COLOR_REGEX.find(dice).unwrap().as_str();
                 if cubes[color] < number {

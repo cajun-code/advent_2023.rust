@@ -13,7 +13,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     let mut total:u32 = 0;
     //println!("{}", input);
     //let contents = fs::read_to_string(input).expect("Could not read input file");
-    let lines = input.split("\n");
+    let lines = input.split('\n');
     for line in lines{
         let forward_numbers: Vec<&str> = line.matches(char::is_numeric).collect();
         let rev_numbers: Vec<&str> = line.rmatches(char::is_numeric).collect();
@@ -30,7 +30,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let mut total:u32 = 0;
     //println!("{}", input);
     //let contents = fs::read_to_string(input).expect("Could not read input file");
-    let lines = input.split("\n");
+    let lines = input.split('\n');
     
     for line in lines{
         if line.is_empty(){

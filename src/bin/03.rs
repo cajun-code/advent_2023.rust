@@ -12,7 +12,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     let mut lines = input.lines();
     let mut previous: Option<&str> = None;
     let mut current: Option<&str> = None;
-    let mut forward: Option<&str> = None;
+    let forward: Option<&str> = None;
     let mut total: u32 = 0;
     current = lines.next();
     for line in lines{
@@ -30,9 +30,7 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
         let part = cap.get(0).unwrap().as_str();
         let v:Vec<_> = current.unwrap().match_indices(part).collect();
         let mut pos = v.first().unwrap().0;
-        if pos <= 0 {
-             pos = 0;
-        }else{
+        if pos > 0{
             pos -=1;
         }
         let mut len = v.first().unwrap().1.len()+2+pos;
@@ -46,18 +44,18 @@ fn check_for_parts(previous: Option<&str>, current: Option<&str>, forward:Option
         if previous.is_some(){
             let slice = &previous.unwrap()[pos .. len];
             println!("cutting string {} at {pos}, {len}", previous.unwrap());
-            is_previous = SYMBLE_REGEX.is_match(slice.replace(".", " ").as_str());
+            is_previous = SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
             println!("Looking back at previous row: {slice} = {is_previous}");
         }
         let slice = &current.unwrap()[pos .. len];
         println!("cutting string {} at {pos}, {len}", current.unwrap());
-        is_current = SYMBLE_REGEX.is_match(slice.replace(".", " ").as_str());
+        is_current = SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
         println!("Looking at current row: {slice} {is_current}");
 
         if forward.is_some() {
             let slice = &forward.unwrap()[pos .. len];
             println!("cutting string {} at {pos}, {len}", forward.unwrap());
-            is_future =  SYMBLE_REGEX.is_match(slice.replace(".", " ").as_str());
+            is_future =  SYMBLE_REGEX.is_match(slice.replace('.', " ").as_str());
             println!("Looking at forward row: {slice} {is_future}");
         }
         if is_previous || is_current || is_future {
